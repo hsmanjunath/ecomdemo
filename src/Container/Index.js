@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import Product from '../Componet/Product';
 import { getProducts } from '../Action/ProductAction'
 import { getSearch } from '../Action/ProductAction'
-
 import Grid from '@material-ui/core/Grid';
 import Pagination from '@material-ui/lab/Pagination';
 import { fade, makeStyles } from '@material-ui/core/styles';
@@ -40,7 +39,31 @@ const Index = () => {
       display: 'none',
       [theme.breakpoints.up('sm')]: {
         display: 'block',
+        width:'175px',
       },
+    },
+    panelheading:{
+      background:'#ccc',
+      padding:'10px',
+    },
+    filterlay:{
+      width:'100%',
+    },
+    filterbox:{
+      padding: '20px !important',
+      border: '1px solid lightgrey',
+      margin: '20px 0',
+    },
+    
+    
+    productbox:{
+      margin:'20px 0',
+      border:'1px solid #ccc',
+    },
+    paginationbar:{
+      margin:'20px 0',
+      background:'#ccc',
+      color:'white',
     },
     search: {
       position: 'relative',
@@ -102,7 +125,7 @@ const Index = () => {
       <div className={classes.grow}>
         <AppBar position="static">
           <Toolbar>
-            <Typography className={classes.title} variant="h6" noWrap>
+            <Typography  className={classes.title} variant="h6" noWrap>
               Walmart
             </Typography>
             <div className={classes.search}>
@@ -129,10 +152,10 @@ const Index = () => {
         </AppBar>
 
       </div >
-      <Grid container xs={12} lg={12} md={12} spacing={3}>
-        <Grid item xs={3} lg={3} md={3}>
-          <FormControl component="fieldset">
-            <FormLabel component="legend">Ratings</FormLabel>
+      <Grid  container xs={12} lg={12} md={12} spacing={3}>
+        <Grid className={classes.filterbox} item xs={6} lg={2} md={3}>
+          <FormControl className={classes.filterlay} component="fieldset" >
+            <FormLabel className={classes.panelheading} component="legend">Ratings</FormLabel>
             <RadioGroup aria-label="rating" name="rating" value={rating} onChange={(e)=>{
               setRating(e.target.value)
               dispatch(getSearch(page,8,term,e.target.value,price))
@@ -145,8 +168,8 @@ const Index = () => {
             </RadioGroup>
           </FormControl>
               <br></br>
-          <FormControl component="fieldset">
-            <FormLabel component="legend">Price</FormLabel>
+          <FormControl  className={classes.filterlay} component="fieldset">
+            <FormLabel className={classes.panelheading} component="legend">Price</FormLabel>
             <RadioGroup aria-label="price" name="price" value={price} onChange={(e)=>{
               setPrice(e.target.value)
               dispatch(getSearch(page,8,term,rating,e.target.value))
@@ -160,7 +183,7 @@ const Index = () => {
           </FormControl>
 
         </Grid>
-        <Grid item xs={9} lg={9} md={9}>
+        <Grid className={classes.productbox} item xs={6} lg={10} md={9}>
           {products.map((product, index) => (
 
             <Product key={index} image={IMAGE_URL + product.productImage} productId={product.productId} productName={product.productName} price={product.price} shortDescription={product.shortDescription} />
@@ -169,7 +192,7 @@ const Index = () => {
         </Grid>
       </Grid>
 
-      <Pagination count={8} shape="rounded" size="large" onChange={(event, page) => setPage(page)} />
+      <Pagination className={classes.paginationbar} count={8} color="white" shape="rounded" size="large" onChange={(event, page) => setPage(page)} />
 
     </>
   )

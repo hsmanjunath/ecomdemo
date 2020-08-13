@@ -25,18 +25,31 @@ import Grid from '@material-ui/core/Grid';
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: '345',
+    background:'#fff',
+    margin:'5px',
   },
   productbox:{
-    height:'250px',
+    height:'150px',
+    overflow:'hidden',
+    padding:'10px',
   },
   inlineflex:{
     display: 'inline-flex',
+    width:'100%',
+},
+images:{
+  height:'175',
 },
   media: {
-    height: 0,
+    height: '150px',
     paddingTop: '56.25%', // 16:9
+
     
   },
+  cardhead:{
+    padding:'10px',
+    height:'100px',
+  },  
   expand: {
     transform: 'rotate(0deg)',
     marginLeft: 'auto',
@@ -70,9 +83,9 @@ export default function RecipeReviewCard(props) {
  
   return (
   
-  <Grid className={classes.inlineflex} item xs={3} lg={3} md={3}>
+  <Grid className={classes.inlineflex} item xs={12} lg={3} md={3}>
     <Card className={classes.root}>
-      <CardHeader
+      <CardHeader className={classes.cardhead}
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>
             {props.productName[0]}
@@ -104,7 +117,7 @@ export default function RecipeReviewCard(props) {
       /></Link>
       <CardContent>
         <Typography  className={classes.productbox} variant="body2" color="textSecondary" component="p">
-        <div
+        <div className={classes.images}
   dangerouslySetInnerHTML={{
     __html: props.shortDescription
   }}></div>
