@@ -17,3 +17,23 @@ export const getProducts = (page=1,size=8) => async(dispatch) => {
     }
 
 }
+
+
+
+
+export const getSearch = (page=1,size=8, search="") => async(dispatch) => {
+    try{
+        const request = await fetch(BASE_URL+page+'/'+size+"?search="+search);
+        const response = await request.json()
+    dispatch({
+        type: Types.getProductsSuccess,
+        payload: response,
+    })
+    } catch(err){
+        dispatch({
+            type: Types.getProductsFailure,
+            payload: err.message
+        })
+    }
+
+}

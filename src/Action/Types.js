@@ -2,6 +2,7 @@ const Types = {
 
     getProductsSuccess:"getProductsSuccess",
     getProductsFailure:"getProductsFailure",
+
  
 }
  
